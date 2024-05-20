@@ -5,11 +5,11 @@ const hours = document.getElementById("hours")
 
 export function hoursLoad({ date }) {
 	const opening = openingHours.map((hour) => {
-		// Recuperar somente a hora.
-		const [scheduleHour] = hour.split(":")
+		// Recuperar somente a hora e minutos.
+		const [scheduleHour, scheduleMinute] = hour.split(":").map(Number);
 
 		// Adicionar a hora na data e verifica se está no passado.
-		const isHourPast = dayjs(date).add(scheduleHour, "hour").isAfter(dayjs())
+		const isHourPast = dayjs(date).hour(scheduleHour).minute(scheduleMinute).isAfter(dayjs())
 
 		return {
 			hour,
